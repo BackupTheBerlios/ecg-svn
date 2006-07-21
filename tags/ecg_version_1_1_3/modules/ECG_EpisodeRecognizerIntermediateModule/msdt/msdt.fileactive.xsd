@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:annotation>
+		<xs:documentation>
+			This XML schema defines the structure of an "File active episode" 
+			MicroSensorDataType. It groups two msdt.editor.xsd events to represent
+			that this editor's file was active (i.e. has probably been looked at).
+			The flag "changed" indicates whether the file has been edited while
+			being active.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="microActivity">
+		<xs:complexType>
+	    	<xs:sequence>
+				<xs:element name="username" type="xs:token"/>
+				<xs:element name="projectname" type="xs:token"/>
+				<xs:element name="endtime" type="xs:string"/>
+				<xs:element name="duration" type="xs:long"/>
+				<xs:element name="changed" type="xs:int"/>
+				<xs:element name="resourcename" type="xs:normalizedString"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
