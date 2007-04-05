@@ -1,0 +1,16 @@
+ElectroCodeoGram 1.2.0
+(c) Freie Universität Berlin, Frank Schlesinger, 2007
+
+CONTENTS
+========
+ecg/ - An ECGLab distribution. 
+lib/ - ECG libs to develop modules and Java-based sensors
+doc/ - JavaDoc for Jars in /lib
+plugins/ - Eclipse-Plugin. NOTE: This does not contain the Lab for INLINE mode. Copy ecg/ to the plugin directory.
+user.home/ - Includes files to be copied in the home folder of each user who uses the Eclipse sensor. It is configured for INLINE mode. Change ECG_SERVER_TYPE=REMOTE and the ECG_SERVER_ADDRESS for true Client/Server functionality
+
+REQUIREMENTS
+============
+Requires Java 1.5 JVM for ECGLab
+Requires Java 1.4 JVM for the Eclipse Sensor
+Eclipse Sensor runs on Eclipse 3.1 or 3.2, and requires for Inline mode 1.5 JVM

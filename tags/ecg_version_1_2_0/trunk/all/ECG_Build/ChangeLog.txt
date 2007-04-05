@@ -1,0 +1,66 @@
+ElectroCodeoGram 1.2
+(c) Freie Universität Berlin, Frank Schlesinger, 2007
+
+CHANGE LOG
+==========
+Changes for 1.1.3:
+* Badly handled CDATA section in some events resolved (rev903)
+* CDATA parsing in FileSystemSourceModule fixed (rev922)
+* Allows to terminate ECGLab after last event was read from file (rev910, rev923)
+* Hidden folders are now ignored during search for MSDT and Module folders (rev919)
+* Some minor bug fixes (rev902, rev911, rev918)
+* Build procedure for EclipseSensor (rev920) and main Build (rev924) slightly changed
+* MSDTs: Introduced new MSDT 'system' which reports internal ECGLab termination event (rev909), Changed 'user' MSDT schema definition to allow for CDATA sections (rev921)
+* Internals: Modules may emit more than one event after recieving event (rev899, rev901, rev902), helper functions (rev908), new package structure in EclipseSensor (rev916) and ECGLab (rev917)
+* First version of CodeLocationTrackerIntermediateModule (rev904, rev906, rev915, rev925)
+* Cleanup of CodechangeDifferIntermediateModule (rev907, rev914)
+* Latest version 1.0.4 of FocusTracker (rev912, rev913)
+
+Changes for 1.1.4:
+* The Eclipse plug-in now has a property dialog. It serves as a workspace dependend setting of the values which by default are read from sensor.properties. The settings only take effect after reload of the workspace. Instead of an ECG_SERVER_PATH the dialog provides to set a link to a batch file which starts the inline ecg lab. The batch file will be ignored in remote mode. (rev935, rev936, rev937)
+* New ECG_SERVER_TYPE "NULL" for sensors which disables ECG logging completely. (rev935, rev937)
+* FileTargetModule (rev939, rev954, rev972, rev985):
+** Resolved bug on always overwriting the output file 
+** Added property "Append Events" to switch between insertion and overwrite mode. Default is true.
+** New property "Stamp File Name" which if set to true will append the day in YYMMDD format to the output file name. Appending to file means appending it right before the last '.' in the Output File.
+   NOTE: Set to default, i.e. default behaviour changes: Output files will be stamped with date. Each new day a new file will be created.
+** Changed "Split file" property to append -01, -02 to the output file name. Appending to file means appending it right before the last '.' in the Output File.
+** File will be created as late as possible
+** Updated properties file to 1.1 
+* CommonData (i.e. each basic event type) now contains a <version>X</version> tag with X being a simple integer. MSDTs by 1.1.3 or earlier should be interpreted as version 1 (rev930, rev937, rev942, rev949, rev952)
+* CommonData (i.e. each basic event type) now contains a <creator>ABC</creator> tag with ABC being a string. It should contain the creator of this event. The Eclipse-Seonsor sends a "ECGEclipseSensor1.1.4" in this version and must be updated for each new version. (rev942, rev946, rev949, rev952)
+* A new msdt.textoperation.xsd now send copy, cut, and paste events with selection contents, clipboard contents, startline, endline und offset. Offset is the position of the selection in chars from the beginning of the file. msdt.user.xsd is not used anymore for this CCP purpose. (rev950, rev951, rev990)
+* FileSourceModule:  (rev953, rev956, rev992)
+** New property "Ignored Event Types" may contain MSDT names which will not be parsed at all. This results in slightly better performance.
+** Added the treatment of the Input File as a directory which loads .out/.log/.events/.ecg files in the directory in lexicographical order
+** Resolved bug in FileReader concerning "Send End Event" in GUI mode: Now the FileReader module will become inactive in case of "Send End Event" = true. The Warning "null has been read by the EventReader" will not occur anymore (rev956, rev991)
+* CSVFileWriter (rev957):
+** Property "Delimiter" (default ist TAB character) specifies the seperator in der CSV file
+** In the "Columns" perperty, a column may have alternative names set as a/b/c. For example, "resourcename/editorname" for a column means that if a "resourcename" is present it will be printed, if not, the editorname will be printed, if available 
+* MSDTFilterModule (rev986):
+** Added "Passer" property which is the reverse to "Blocker" and should not be used in parallel to Blocker
+* New EpisodeRecognizer for msdt.runactive.xsd computed from msdt.run - run/debug- and -terminated event pairs (rev958,rev960,rev963)
+* New EpisodeRecognizer for msdt.antactive.xsd computed from msdt.ant - run/debug- and -terminated event pairs (rev958,rev960,rev963)
+* CodeLineDiffer: 
+** Bugfixes and small changes, especially correct deletion interpretation and handling of double code status events (rev969, rev977, rev981, rev987)
+** Introduction of msdt.linediffbase.xsd for first representation of a text file (rev997, rev998)
+* CodeLocationTracker: 
+** Bugfixes
+** Sends msdt.codelocation events (rev988, rev993)
+
+Note that there have been some intermediate releases 1.1.5 and 1.1.6.
+
+Changes for 1.2.0:
+* Right before a paste and right after a paste codechange events are sent immediately (rev1031)
+* Extended Recognizer Framework to allow for emitting more than one episode per event event from a single live recognizer. (rev1036)
+* Evtl. user name bug beseitigt (rev1044)
+* Enhanced Manual Annotator: Allows Events as well as Episodes, Project name and Remark to be sent as msdt.manualevent and msdt.manualepisode (rev1046)
+* Test event now confirms to msdt.test.xsd and msdt.testrun.xsd (rev1053)
+* Release version of DatabaseSource/TargetModules (rev1013, rev1023, rev1033, rev1034, rev1060 and others)
+* Bug/omission fixes (rev1054, rev1056, rev1057)
+* ATL 1.0.0: (rev1064, rev1065)
+* ApplicationActivity episode recognizer (rev1072)
+* CSVWriter 1.2: # can be used to concatenate values in a row (rev1073)
+* Added Copy/Cut/Paste-Tracker from Sofoklis' master thesis (rev1105)
+* Added initial version of BettermentRecognizer, currently does only report run/change distances to console. (rev1106)
+* Many minor code changes due to compiler warnings and FindBugs messages
