@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:annotation>
+		<xs:documentation>
+			This XML schema defines the structure of the "Application" MicroSensorDataType.
+			It reports activation/deactivation and renaming of window titles grouped per application process
+			* processHandle: id of the application's process
+			* windowHandle: id of the application's window
+			* threadHandle: id of the application's thread
+			* type: kind of event regarding the window
+			* windowTitle: current title of window
+			* processName: name of the applications process
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="msdt.common.xsd"/>
+
+	<xs:element name="microActivity">
+		<xs:complexType>
+	    	<xs:sequence>
+				<xs:element name="commonData" type="commonDataType"/>
+				<xs:element name="application">
+					<xs:complexType>
+						<xs:sequence>
+						 <xs:element name="processHandle" type="xs:int"/>
+						 <xs:element name="threadHandle" type="xs:int"/>
+						 <xs:element name="windowHandle" type="xs:int"/>
+						 <xs:element name="type">
+						  <xs:simpleType>
+						   <xs:restriction base="xs:string">
+                            <xs:enumeration value="ACTIVATE"/>
+                            <xs:enumeration value="RENAME"/>
+                            <xs:enumeration value="DEACTIVATE"/>
+						   </xs:restriction>
+						  </xs:simpleType>
+						 </xs:element>
+						 <xs:element name="windowTitle" type="xs:string"/>
+						 <xs:element name="processName" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>			
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
